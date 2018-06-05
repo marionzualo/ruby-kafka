@@ -30,6 +30,10 @@ module Kafka
         end
       end
 
+      def to_s
+        topics.to_s
+      end
+
       def self.decode(decoder)
         topics = decoder.array {
           topic = decoder.string

@@ -200,7 +200,9 @@ module Kafka
     end
 
     def committed_offsets
-      @committed_offsets ||= @group.fetch_offsets
+      @committed_offsets ||= @group.fetch_offsets.tap do |offsets_info|
+        @logger.info "Fetched offsets: #{offsets_info}"
+      end
     end
 
     def committed_offset_for(topic, partition)
